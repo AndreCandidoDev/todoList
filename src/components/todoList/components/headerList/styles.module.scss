@@ -1,0 +1,19 @@
+.headerList {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    user-select: none;
+
+    h1 {
+        letter-spacing: 10px;
+    }
+
+    button {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+}
