@@ -1,0 +1,26 @@
+.includeTask {
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    width: 100%;
+    // background: #241e32;
+
+    .content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 2rem;
+
+        input {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            color: white;
+
+            &:focus {
+                outline: none;
+            }        
+        }
+    }
+}

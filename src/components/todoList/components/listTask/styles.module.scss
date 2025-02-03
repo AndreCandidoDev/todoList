@@ -1,0 +1,12 @@
+.listTask {
+    margin-top: 1rem;
+
+    .content {
+        overflow: auto;
+        max-height: 320px;
+
+        >div {
+            border-bottom: 1px solid #ccc;
+        }
+    }
+}

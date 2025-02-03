@@ -9,17 +9,17 @@ type Props = {
 type modeOptions = "light" | "dark"
 
 interface appContextType {
-    mode: modeOptions
-    data: appDataType[]
-    setData: React.Dispatch<React.SetStateAction<appDataType[]>>
-    setMode: React.Dispatch<React.SetStateAction<"light" | "dark">>
+  mode: modeOptions
+  data: appDataType[]
+  setData: React.Dispatch<React.SetStateAction<appDataType[]>>
+  setMode: React.Dispatch<React.SetStateAction<"light" | "dark">>
 }
 
 const defaultProvider: appContextType = {
-    mode: "dark",
-    data: [],
-    setData: () => {},
-    setMode: () => {},
+  mode: "dark",
+  data: [],
+  setData: () => {},
+  setMode: () => {},
 }
 
 const AppContext = createContext<appContextType>(defaultProvider)

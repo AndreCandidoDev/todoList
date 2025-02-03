@@ -1,7 +1,12 @@
 .todoList {
-    position: absolute;
-    top: 10%;
-    left: 35%;
+    position: fixed;
+    top: 7%;
+    left: 37%;
     z-index: 999;
     width: 400px;
+
+    .spacer {
+        width: 100%;
+        padding: 1rem 0;
+    }
 }
