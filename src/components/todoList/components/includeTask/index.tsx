@@ -3,7 +3,7 @@ import { BaseSyntheticEvent, useContext, useEffect, useRef, useState } from "rea
 import { AppContext } from "@/context"
 import { appDataType } from "@/types/appData"
 import { CustomCheckbox } from "./components/customCheckbox"
-// import { addTask } from "@/utils/taskFunctions"
+import { addTask } from "@/utils/taskFunctions"
 
 interface IncludeTaskProps {
     dataTask?: appDataType
@@ -13,28 +13,41 @@ export const IncludeTask: React.FC<IncludeTaskProps> = ({ dataTask }) =>
 {
     const { mode, setData, data } = useContext(AppContext)
 
-    const [activeTask, setActiveTask] = useState(dataTask?.taskCompleted || false)
-    const [taskText, setTextTask] = useState(dataTask?.name || "")
+    const [activeTask, setActiveTask] = useState<boolean>(false)
+    const [taskText, setTextTask] = useState<string>("")
 
     const ref = useRef<HTMLInputElement>(null)
 
-    useEffect(() => 
-    {
-        if(dataTask)
-        {
-            console.log("acionou")
-            const newData = [...data]
-            const newObj = newData.find((item) => item.id === dataTask.id)
-            if(newObj)
-            {
-                newObj.taskCompleted = activeTask
-                newObj.name = taskText
+    // useEffect(() => 
+    // {
+    //     if(dataTask)
+    //     {
+    //         console.log("acionou")
+    //         const newData = [...data]
+    //         const newObj = newData.find((item) => item.id === dataTask.id)
+    //         if(newObj)
+    //         {
+    //             newObj.taskCompleted = activeTask
+    //             newObj.name = taskText
 
-                setData([...newData])
-            }
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dataTask, activeTask, taskText])
+    //             setData([...newData])
+    //         }
+    //     }
+    // // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [dataTask, activeTask, taskText])
+
+    useEffect(() => 
+    { 
+        console.info("@@@@@",dataTask) 
+        if(dataTask && ref.current)
+        {
+            ref.current.value = dataTask.name
+            const isActive = dataTask.taskCompleted
+            setActiveTask(isActive)
+            setTextTask(dataTask.name)
+        }    
+    }, [dataTask])
+
 
     const resetInputs = () =>
     {
@@ -60,16 +73,16 @@ export const IncludeTask: React.FC<IncludeTaskProps> = ({ dataTask }) =>
 
         const dataObj = { id: id,  taskCompleted: activeTask, name: taskText }
 
-        // const result = addTask(dataObj)
+        const result = addTask(dataObj)
 
-        // if(result)
-        // {
-        newData.push(dataObj)
+        if(result)
+        {
+            newData.push(dataObj)
 
-        setData([...newData])
+            setData([...newData])
 
-        resetInputs()
-        // }
+            resetInputs()
+        }
     }
 
     const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) =>
@@ -79,8 +92,6 @@ export const IncludeTask: React.FC<IncludeTaskProps> = ({ dataTask }) =>
             handleTask()
         }
     }
-
-    useEffect(() => { console.error("@@@@@",dataTask) }, [dataTask])
 
     return (
         <div 

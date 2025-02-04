@@ -29,16 +29,3 @@ export const addTask = (task: appDataType) =>
         return false
     }
 }
-
-export const getTasks = () => 
-{
-    const storage = localStorage.getItem("tasks")
-    if(storage)
-    {
-        const data = JSON.parse(storage)
-        console.log("Data", data)
-        return data
-    }
-
-    return []
-}
