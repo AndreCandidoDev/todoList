@@ -1,5 +1,5 @@
 export type appDataType = {
     id: number
-    active: boolean
+    taskCompleted: boolean
     name: string
 }

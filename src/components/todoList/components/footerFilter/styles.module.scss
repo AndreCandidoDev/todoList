@@ -22,11 +22,16 @@
         gap: 1rem;
     }
 
-    .filter {
+    .filter, .selected {
+        font-size: 12px;
         cursor: pointer;
+    }
 
-        &:hover {
-            color: blue;
-        }
+    .filter:hover {
+        color: blue;
+    }
+
+    .selected {
+        color: blue;
     }
 }

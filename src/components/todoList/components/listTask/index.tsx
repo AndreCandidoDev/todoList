@@ -9,10 +9,17 @@ export const ListTask = () =>
 {
     const { data } = useContext(AppContext)
 
-    console.log("data", data)
+    console.log("data list", data)
 
     return (
         <div className={styles.listTask}>
+            {/* <div style={{ color: 'white', height:"300px" }}>
+                {data.map((task) => (
+                    <div key={task.id}>
+                        <p>{task.name} - {task.taskCompleted ? 'Completed' : 'Active'}</p>
+                    </div>
+                ))}
+            </div> */}
             <div className={styles.content}>
                 {data.length > 0 && (
                     data.map((item: appDataType, key: number) => (

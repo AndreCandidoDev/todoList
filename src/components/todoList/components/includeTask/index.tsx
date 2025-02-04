@@ -1,8 +1,9 @@
 import styles from "./styles.module.scss"
-import { BaseSyntheticEvent, useContext, useRef, useState } from "react"
+import { BaseSyntheticEvent, useContext, useEffect, useRef, useState } from "react"
 import { AppContext } from "@/context"
 import { appDataType } from "@/types/appData"
 import { CustomCheckbox } from "./components/customCheckbox"
+// import { addTask } from "@/utils/taskFunctions"
 
 interface IncludeTaskProps {
     dataTask?: appDataType
@@ -12,10 +13,28 @@ export const IncludeTask: React.FC<IncludeTaskProps> = ({ dataTask }) =>
 {
     const { mode, setData, data } = useContext(AppContext)
 
-    const [activeTask, setActiveTask] = useState(dataTask?.active || false)
+    const [activeTask, setActiveTask] = useState(dataTask?.taskCompleted || false)
     const [taskText, setTextTask] = useState(dataTask?.name || "")
 
     const ref = useRef<HTMLInputElement>(null)
+
+    useEffect(() => 
+    {
+        if(dataTask)
+        {
+            console.log("acionou")
+            const newData = [...data]
+            const newObj = newData.find((item) => item.id === dataTask.id)
+            if(newObj)
+            {
+                newObj.taskCompleted = activeTask
+                newObj.name = taskText
+
+                setData([...newData])
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dataTask, activeTask, taskText])
 
     const resetInputs = () =>
     {
@@ -32,7 +51,6 @@ export const IncludeTask: React.FC<IncludeTaskProps> = ({ dataTask }) =>
     {
         if(dataTask)
         {
-            // pass
             return
         }
 
@@ -40,21 +58,29 @@ export const IncludeTask: React.FC<IncludeTaskProps> = ({ dataTask }) =>
 
         const newData = data
 
-        newData.push({ id: id,  active: activeTask, name: taskText })
-        
+        const dataObj = { id: id,  taskCompleted: activeTask, name: taskText }
+
+        // const result = addTask(dataObj)
+
+        // if(result)
+        // {
+        newData.push(dataObj)
+
         setData([...newData])
 
         resetInputs()
+        // }
     }
 
     const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) =>
     {
         if(e.key === 'Enter' && taskText !== "")
         {
-            console.log("uhul")
             handleTask()
         }
     }
+
+    useEffect(() => { console.error("@@@@@",dataTask) }, [dataTask])
 
     return (
         <div 
@@ -64,13 +90,17 @@ export const IncludeTask: React.FC<IncludeTaskProps> = ({ dataTask }) =>
         >
             <div className={styles.content}>
                 <CustomCheckbox activeTask={activeTask} setActiveTask={setActiveTask}/>
-                <input 
-                    type="text" 
-                    placeholder="Create a new todo..."
-                    defaultValue={taskText}
-                    onChange={(e: BaseSyntheticEvent) => setTextTask(e.target.value)}
-                    ref={ref}
-                />
+                {activeTask && dataTask ?
+                    <p className={styles.taskText}>{taskText}</p>
+                    :
+                    <input 
+                        type="text" 
+                        placeholder="Create a new todo..."
+                        defaultValue={taskText}
+                        onChange={(e: BaseSyntheticEvent) => setTextTask(e.target.value)}
+                        ref={ref}
+                    />
+                }
             </div>
         </div>
     )
