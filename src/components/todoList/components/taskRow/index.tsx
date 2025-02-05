@@ -94,10 +94,14 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task }) =>
                             handler={handleTaskCompletion}
                         />
                         <input
-                            style={{ color: mode === 'dark' ? 'white' : 'black' }} 
+                            style={{ 
+                                color: mode === 'dark' ? 'white' : 'black', 
+                                textDecoration: active ? 'line-through' : 'none'
+                            }} 
                             ref={ref} 
                             defaultValue={taskName}
                             onChange={(e) => handleTaskName(e)}
+                            disabled={active ? true : false}
                         />
                     </div>
                     <Image

@@ -1,38 +1,8 @@
 import styles from "./styles.module.scss"
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "@/context"
-
-type selectedFilterType = 'all' | 'active' | 'completed'
-
-interface filterButtonProps {
-    type: selectedFilterType
-    selectedFilter: selectedFilterType
-    setSelectedFilter: React.Dispatch<React.SetStateAction<selectedFilterType>>
-    handler: () => void
-}
-
-const FilterButton: React.FC<filterButtonProps> = ({ 
-    selectedFilter, 
-    setSelectedFilter,
-    type,
-    handler 
-}) => 
-{
-    const handleButton = () =>
-    {
-        setSelectedFilter(type)
-        handler()
-    }
-
-    return (
-        <p 
-            className={selectedFilter === type ? styles.selected : styles.filter}
-            onClick={() => handleButton()}
-        >
-            {type.charAt(0).toUpperCase() + type.slice(1)}
-        </p>
-    )
-}
+import { selectedFilterType } from "@/types/selectedFilter"
+import { FilterButton } from "../filterButton"
 
 export const FooterFilter: React.FC = () =>
 {

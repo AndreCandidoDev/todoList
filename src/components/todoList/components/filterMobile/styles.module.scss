@@ -1,0 +1,12 @@
+.filterMobile {
+    width: 100%;
+    padding: 1rem;
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+}

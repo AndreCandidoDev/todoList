@@ -1,3 +1,4 @@
+import { FilterMobile } from "./components/filterMobile"
 import { HeaderList } from "./components/headerList"
 import { IncludeTask } from "./components/includeTask"
 import { ListTask } from "./components/listTask"
@@ -12,6 +13,10 @@ export const TodoList: React.FC = () =>
             <IncludeTask/>
             <div className={styles.spacer}></div>
             <ListTask/>
+            <div className={styles.filterMobile}>
+                <div className={styles.spacer}></div>
+                <FilterMobile/>
+            </div>
         </div>
     )
 }

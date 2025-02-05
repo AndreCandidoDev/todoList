@@ -1,0 +1,1 @@
+export type selectedFilterType = 'all' | 'active' | 'completed'

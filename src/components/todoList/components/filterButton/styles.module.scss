@@ -1,0 +1,16 @@
+.filter, .selected {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.filter {
+    color: #ccc;
+}
+
+.filter:hover {
+    color: blue;
+}
+
+.selected {
+    color: blue;
+}
