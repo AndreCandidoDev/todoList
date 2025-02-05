@@ -4,17 +4,29 @@ import styles from "./styles.module.scss"
 interface customCheckboxProps {
     activeTask: boolean
     setActiveTask: React.Dispatch<React.SetStateAction<boolean>>
+    handler?: () => void
 }
 
 export const CustomCheckbox: React.FC<customCheckboxProps> = ({ 
     activeTask, 
-    setActiveTask 
+    setActiveTask,
+    handler 
 }) =>
 {
+    const handleCheckbox = () =>
+    {
+        setActiveTask(!activeTask)
+
+        if(handler)
+        {
+            handler()
+        }
+    }
+ 
     return (
         <div 
             className={styles.customCheckbox} 
-            onClick={() => setActiveTask(!activeTask)}
+            onClick={() => handleCheckbox()}
             style={{background: activeTask ? "linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))" : "transparent"}}
         >
             <div className={styles.content}>

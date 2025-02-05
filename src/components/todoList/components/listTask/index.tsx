@@ -1,9 +1,8 @@
 import styles from "./styles.module.scss"
 import { AppContext } from "@/context"
 import { useContext, useEffect, useState } from "react"
-import { IncludeTask } from "../includeTask"
 import { FooterFilter } from "../footerFilter"
-import { appDataType } from "@/types/appData"
+import { TaskRow } from "../taskRow"
 
 export const ListTask = () =>
 {
@@ -19,19 +18,10 @@ export const ListTask = () =>
 
     return (
         <div className={styles.listTask}>
-            {/* <div style={{ color: 'white', height:"300px" }}>
-                {dataTable.map((task) => (
-                    <div key={task.id}>
-                        <p>{task.name} - {task.taskCompleted ? 'Completed' : 'Active'}</p>
-                    </div>
-                ))}
-            </div> */}
             <div className={styles.content}>
-                {dataTable.length > 0 && (
-                    dataTable.map((item: appDataType, key: number) => (
-                        <IncludeTask key={key} dataTask={item}/>
-                    ))
-                )}
+                {dataTable.map((task, key) => (
+                    <TaskRow key={key} task={task}/>
+                ))}
             </div>
             <FooterFilter/>
         </div>

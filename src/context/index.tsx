@@ -1,5 +1,6 @@
 "use client"
 import { appDataType } from '@/types/appData'
+import { deleteTask, getTasksStorage } from '@/utils/taskFunctions';
 import { ReactNode, createContext, useState } from 'react'
 
 type Props = {
@@ -16,6 +17,8 @@ interface appContextType {
   getTasks: () => void
   getActiveTasks: () => void
   getCompletedTasks: () => void
+  clearCompletedTasks: () => void
+  countActiveTasks: () => number
 }
 
 const defaultProvider: appContextType = {
@@ -26,6 +29,8 @@ const defaultProvider: appContextType = {
   getTasks: () => {},
   getActiveTasks: () => {},
   getCompletedTasks: () => {},
+  clearCompletedTasks: () => {},
+  countActiveTasks: () => 0
 }
 
 const AppContext = createContext<appContextType>(defaultProvider)
@@ -37,38 +42,73 @@ const AppProvider = ({ children }: Props) =>
 
   const getTasks = () =>
   {
-    const storage = localStorage.getItem("tasks")
+    const storage = getTasksStorage()
+
     if(storage)
     {
-      const dataStorage = JSON.parse(storage)
-      console.log("DataStorage", dataStorage)
-      setData([...dataStorage])
+      setData([...storage])
     }
   }
 
   const getActiveTasks = () => 
   {
-    const storage = localStorage.getItem("tasks")
+    const storage = getTasksStorage()
+
     if(storage)
-    {
-      let dataStorage = JSON.parse(storage)
-      dataStorage = dataStorage.filter((item: appDataType) => item.taskCompleted === false)
-      console.log("DataStorage active", dataStorage)
-      setData([...dataStorage])
+    {      
+      const storageFiltered = storage.filter((item: appDataType) => !item.taskCompleted)
+      
+      setData([...storageFiltered])
     }
   }
 
   const getCompletedTasks = () => 
   {
-    const storage = localStorage.getItem("tasks")
+    const storage = getTasksStorage()
     
     if(storage)
     {
-      let dataStorage = JSON.parse(storage)
-      dataStorage = dataStorage.filter((item: appDataType) => item.taskCompleted === true)
-      console.log("DataStorage completed", dataStorage)
-      setData([...dataStorage])
+      const storageFiltered = storage.filter((item: appDataType) => item.taskCompleted)
+      
+      setData([...storageFiltered])
     }
+  }
+
+  const clearCompletedTasks = () =>
+  {
+    const storage = getTasksStorage()
+
+    if(storage)
+    {
+      const completedTasks = storage.filter((item: appDataType) => item.taskCompleted)
+      
+      for(let i = 0; i < completedTasks.length; i++)
+      {
+        const result = deleteTask(completedTasks[i])
+
+        if(!result)
+        {
+          console.error("Error in clear Completed")
+          break
+        }
+      }
+
+      getTasks()
+    }
+  }
+
+  const countActiveTasks = () =>
+  {
+    const storage = getTasksStorage()
+    
+    if(storage)
+    {
+      const actives = storage.filter((item: appDataType) => !item.taskCompleted)
+
+      return actives.length
+    }
+
+    return 0
   }
 
   const values = {
@@ -79,6 +119,8 @@ const AppProvider = ({ children }: Props) =>
     getTasks,
     getActiveTasks,
     getCompletedTasks,
+    clearCompletedTasks,
+    countActiveTasks,
   }
 
   return (<AppContext.Provider value={values}>{children}</AppContext.Provider>)

@@ -1,0 +1,31 @@
+.taskRow {
+    width: 100%;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+    
+    .content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .taskInput {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
+    
+            input {
+                width: 100%;
+                background: none;
+                border: 0;
+                cursor: pointer;
+    
+                &:focus {
+                    outline: none;
+                }  
+            }
+        }
+    }
+}

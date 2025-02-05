@@ -36,13 +36,19 @@ const FilterButton: React.FC<filterButtonProps> = ({
 
 export const FooterFilter: React.FC = () =>
 {
-    const { data, mode, getTasks, getActiveTasks, getCompletedTasks } = useContext(AppContext)
+    const { 
+        mode, 
+        getTasks, 
+        getActiveTasks, 
+        getCompletedTasks, 
+        clearCompletedTasks,
+        countActiveTasks, 
+    } = useContext(AppContext)
 
     const [selectedFilter, setSelectedFilter] = useState<selectedFilterType>("all")
 
     useEffect(() => 
     {
-        console.log('acionou')
         getTasks()
     }, [])
 
@@ -52,7 +58,7 @@ export const FooterFilter: React.FC = () =>
             className={styles.footerFilter}
         >
             <div className={styles.content}>
-                <p className={styles.info}>{data.length} Items left</p>
+                <p className={styles.info}>{countActiveTasks()} Items Left</p>
                 <div className={styles.controls}>
                     <FilterButton 
                         selectedFilter={selectedFilter} 
@@ -73,7 +79,12 @@ export const FooterFilter: React.FC = () =>
                         handler={() => getCompletedTasks()}
                     />
                 </div>
-                <p className={styles.filter}>Clear Completed</p>
+                <p 
+                    className={styles.filter} 
+                    onClick={() => clearCompletedTasks()}
+                >
+                    Clear Completed
+                </p>
             </div>
         </div>
     );
