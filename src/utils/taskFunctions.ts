@@ -2,15 +2,18 @@ import { appDataType } from "@/types/appData"
 
 export const getTasksStorage = () =>
 {
-    const storage = localStorage.getItem("tasks")
-    
-    if(storage)
+    if(typeof window !== 'undefined' && window.localStorage)
     {
-        const tasks = JSON.parse(storage)
-        return tasks
+        const storage = localStorage.getItem("tasks")
+        
+        if(storage)
+        {
+            const tasks = JSON.parse(storage)
+            return tasks
+        }
+    
+        return null
     }
-
-    return null
 }
 
 export const addTask = (task: appDataType) => 
