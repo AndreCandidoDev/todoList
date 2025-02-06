@@ -6,7 +6,7 @@
     z-index: 999;
     width: 400px;
 
-    .spacer {
+    .spacerHeader, .spacerList, .spacerFilter {
         width: 100%;
         padding: 1rem 0;
     }
@@ -19,12 +19,20 @@
 @media only screen and (max-width: 1030px) {
     .todoList {
         width: 80%;
+
+        .spacerHeader, .spacerList {
+            padding: 0.5rem 0;
+        }
     }
 }
 
 @media only screen and (max-width: 600px) {
     .todoList {
         width: 90%;
+
+        .spacerHeader, .spacerList, .spacerFilter {
+            padding: 0.4rem 0;
+        }
         
         .filterMobile {
             display: block;

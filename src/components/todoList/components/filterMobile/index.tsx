@@ -10,11 +10,18 @@ export const FilterMobile: React.FC = () =>
 
     const { getTasks, getActiveTasks, getCompletedTasks, mode } = useContext(AppContext)
 
+    const filterMobileClassName = () =>
+    {
+        if(mode === 'dark')
+        {
+            return styles.filterMobile + " " + styles.filterMobileDark
+        }
+
+        return styles.filterMobile + " " + styles.filterMobileLight
+    }
+
     return (
-        <div 
-            className={styles.filterMobile}
-            style={{ background: mode === 'dark' ? '#241e32' : 'white' }}
-        >
+        <div className={filterMobileClassName()}>
             <div className={styles.content}>
                 <FilterButton 
                     selectedFilter={selectedFilter} 

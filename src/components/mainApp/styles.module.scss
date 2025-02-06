@@ -30,15 +30,26 @@
             align-content: space-around;
             justify-items: center;
             justify-content: center;
-            color: #ccc;
+
+            .lineInfo {
+                font-weight: 400;
+            }
         }
 
         .footerDark {
-            background: #000;
+            background: var(--Very-Dark-Blue);
+
+            .lineInfo {
+                color: var(--Dark-Grayish-Blue-dark);
+            }
         }
 
         .footerLight {
-            background: #dedede;
+            background: var(--Very-Light-Grayish-Blue);
+
+            .lineInfo {
+                color: var(--Dark-Grayish-Blue-light);
+            }
         }
     }
 }

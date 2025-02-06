@@ -22,11 +22,18 @@ export const FooterFilter: React.FC = () =>
         getTasks()
     }, [])
 
+    const footerFilterClassName = () =>
+    {
+        if(mode === 'dark')
+        {
+            return styles.footerFilter + " " + styles.footerFilterDark
+        }
+
+        return styles.footerFilter + " " + styles.footerFilterLight
+    }
+
     return (
-        <div 
-            style={{ background: mode === 'dark' ? '#241e32' : 'white' }} 
-            className={styles.footerFilter}
-        >
+        <div className={footerFilterClassName()}>
             <div className={styles.content}>
                 <p className={styles.info}>{countActiveTasks()} Items Left</p>
                 <div className={styles.controls}>

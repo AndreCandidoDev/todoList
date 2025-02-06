@@ -1,20 +1,18 @@
 .customCheckbox, .checked {
-    padding: 1rem;
-    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border: 1px solid var(--Dark-Grayish-Blue-light);
     border-radius: 99%;
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     position: relative;
     user-select: none;
-
-    
 
     .content {
         width: 100%;
         height: 100%;
         position: absolute;
-        left: 6px;
-        bottom: -6px;
+        left: 4px;
+        bottom: -1px;
     }
 }

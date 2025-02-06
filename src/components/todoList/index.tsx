@@ -9,12 +9,12 @@ export const TodoList: React.FC = () =>
     return (
         <div className={styles.todoList}>
             <HeaderList/>
-            <div className={styles.spacer}></div>
+            <div className={styles.spacerHeader}/>
             <IncludeTask/>
-            <div className={styles.spacer}></div>
+            <div className={styles.spacerList}/>
             <ListTask/>
             <div className={styles.filterMobile}>
-                <div className={styles.spacer}></div>
+                <div className={styles.spacerFilter}/>
                 <FilterMobile/>
             </div>
         </div>

@@ -34,8 +34,8 @@ export const CustomCheckbox: React.FC<customCheckboxProps> = ({
                     <Image
                         priority    
                         src={"/svg/icon-check.svg"}
-                        height={20}
-                        width={20}
+                        height={10}
+                        width={10}
                         alt=""
                     />
                 )}

@@ -1,5 +1,5 @@
-.includeTask {
-    padding: 0.5rem;
+.includeTask, .includeTaskDark, .includeTaskLight {
+    padding: 1rem;
     border-radius: 0.3rem;
     width: 100%;
 
@@ -13,19 +13,38 @@
 
         .taskText {
             text-decoration: line-through;
-            color: white;
         }
 
         input {
             width: 100%;
             background: transparent;
             border: 0;
-            color: white;
             font-size: 16px;
+            font-family: var(--font-josefin-sans);
 
             &:focus {
                 outline: none;
             }        
+        }
+    }
+}
+
+.includeTaskDark {
+    background: var(--Very-Dark-Desaturated-Blue);
+
+    .content {
+        input {
+            color: var(--Light-Grayish-Blue);
+        }
+    }
+}
+
+.includeTaskLight {
+    background: var(--Very-Light-Gray);
+
+    .content {
+        input {
+            color: var(--Very-Dark-Desaturated-Blue);
         }
     }
 }

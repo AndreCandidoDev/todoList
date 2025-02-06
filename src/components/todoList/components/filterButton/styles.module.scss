@@ -1,16 +1,17 @@
 .filter, .selected {
     font-size: 12px;
     cursor: pointer;
+    font-weight: 700;
 }
 
 .filter {
-    color: #ccc;
+    color: var(--Dark-Grayish-Blue-light);
 }
 
 .filter:hover {
-    color: blue;
+    color: var(--Bright-Blue);
 }
 
 .selected {
-    color: blue;
+    color: var(--Bright-Blue);
 }

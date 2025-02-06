@@ -1,6 +1,7 @@
-.filterMobile {
+.filterMobile, .filterMobileDark, .filterMobileLight {
     width: 100%;
     padding: 1rem;
+    border-radius: 0.3rem;
 
     .content {
         display: flex;
@@ -9,4 +10,12 @@
         align-items: center;
         gap: 2rem;
     }
+}
+
+.filterMobileDark {
+    background: var(--Very-Dark-Desaturated-Blue);
+}
+
+.filterMobileLight {
+    background: var(--Very-Light-Gray);
 }

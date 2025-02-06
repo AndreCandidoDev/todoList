@@ -1,7 +1,9 @@
-.footerFilter {
+.footerFilter, .footerFilterDark, .footerFilterLight {
     width: 100%;
     padding: 1rem;
     user-select: none;
+    border-bottom-right-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
 
     .content {
         display: flex;
@@ -11,8 +13,9 @@
     }
 
     .filter, .info {
-        color: #ccc;
+        color: var(--Dark-Grayish-Blue-light);
         font-size: 12px;
+        font-weight: 400;
     }
 
     .controls {
@@ -21,18 +24,22 @@
         gap: 1rem;
     }
 
-    .filter, .selected {
+    .filter {
         font-size: 12px;
         cursor: pointer;
     }
 
     .filter:hover {
-        color: blue;
+        color: var(--Bright-Blue);
     }
+}
 
-    .selected {
-        color: blue;
-    }
+.footerFilterDark {
+    background: var(--Very-Dark-Desaturated-Blue);
+}
+
+.footerFilterLight {
+    background: var(--Very-Light-Gray);
 }
 
 @media only screen and (max-width: 600px) {

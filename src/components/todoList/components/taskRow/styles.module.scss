@@ -1,7 +1,7 @@
-.taskRow {
+.taskRow, .taskRowDark, .taskRowLight {
     width: 100%;
-    padding: 0.5rem;
-    border-bottom: 1px solid #ccc;
+    padding: 1rem;
+    border-bottom: 1px solid var(--Dark-Grayish-Blue-light);
     user-select: none;
     
     .content {
@@ -9,23 +9,59 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
 
         .taskInput {
+            width: 100%;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
             gap: 1rem;
     
-            input {
+            .input, .inputDark, .inputLight, .inputRisk {
                 width: 100%;
                 background: none;
                 border: 0;
                 cursor: pointer;
+                font-family: var(--font-josefin-sans);
     
                 &:focus {
                     outline: none;
                 }  
+            }
+
+            .inputRisk {
+                text-decoration: line-through;
+                color: var(--Dark-Grayish-Blue-light) !important;
+            }
+        }
+
+        img {
+            cursor: pointer;
+        }
+    }
+}
+
+.taskRowDark {
+    background: var(--Very-Dark-Desaturated-Blue);
+
+    .content {
+        .taskInput {
+            .inputDark {
+                color: var(--Light-Grayish-Blue);
+            }
+        }
+    }
+}
+
+.taskRowLight {
+    background: var(--Very-Light-Gray);
+
+    .content {
+        .taskInput {
+            .inputLight {
+                color: var(--Very-Dark-Desaturated-Blue);
             }
         }
     }

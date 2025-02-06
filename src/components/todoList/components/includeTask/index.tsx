@@ -52,10 +52,21 @@ export const IncludeTask: React.FC = () =>
         }
     }
 
+    const getClassMode = () =>
+    {
+        if(mode === 'dark')
+        {
+            return styles.includeTask + " " + styles.includeTaskDark
+        }
+        else
+        {
+            return styles.includeTask + " " + styles.includeTaskLight
+        }
+    }
+
     return (
         <div 
-            style={{ background: mode === 'dark' ? "#241e32" : "white" }}
-            className={styles.includeTask} 
+            className={getClassMode()} 
             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKey(e)}
         >
             <div className={styles.content}>

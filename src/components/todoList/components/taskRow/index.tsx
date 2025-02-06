@@ -80,11 +80,30 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task }) =>
         }
     }
 
+    const contentClassName = () =>
+    {
+        if(mode === 'dark')
+        {
+            return styles.taskRow + " " + styles.taskRowDark
+        }
+        
+        return styles.taskRow + " " + styles.taskRowLight
+    }
+
+    const inputClassName = () =>
+    {
+        const activeClass = active ? styles.inputRisk : ""
+
+        if(mode === 'dark')
+        {
+            return styles.input + " " + styles.inputDark + " " + activeClass
+        }
+
+        return styles.input + " " + styles.inputLight + " " + activeClass
+    }
+
     return (
-        <div 
-            className={styles.taskRow}
-            style={{ background: mode === 'dark' ? "#241e32" : "white" }}
-        >
+        <div className={contentClassName()}>
             {task && (
                 <div className={styles.content}>
                     <div className={styles.taskInput}>    
@@ -94,10 +113,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task }) =>
                             handler={handleTaskCompletion}
                         />
                         <input
-                            style={{ 
-                                color: mode === 'dark' ? 'white' : 'black', 
-                                textDecoration: active ? 'line-through' : 'none'
-                            }} 
+                            className={inputClassName()}
                             ref={ref} 
                             defaultValue={taskName}
                             onChange={(e) => handleTaskName(e)}
@@ -105,11 +121,10 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task }) =>
                         />
                     </div>
                     <Image
-                        style={{ cursor: 'pointer' }}
                         priority    
                         src={"/svg/icon-cross.svg"}
-                        height={20}
-                        width={20}
+                        height={10}
+                        width={10}
                         alt=""
                         onClick={() => handleDeleteTask()}
                     />    
