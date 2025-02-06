@@ -6,7 +6,7 @@ import { addTask } from "@/utils/taskFunctions"
 
 export const IncludeTask: React.FC = () =>
 {
-    const { mode, setData, data } = useContext(AppContext)
+    const { mode, setData, data, setActiveTasksCounter, countActiveTasks } = useContext(AppContext)
 
     const [activeTask, setActiveTask] = useState<boolean>(false)
     const [taskText, setTextTask] = useState<string>("")
@@ -36,9 +36,13 @@ export const IncludeTask: React.FC = () =>
 
         if(result)
         {
+            const newCount = countActiveTasks()
+
             newData.push(dataObj)
 
             setData([...newData])
+
+            setActiveTasksCounter(newCount)
 
             resetInputs()
         }
