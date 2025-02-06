@@ -1,6 +1,6 @@
 import { appDataType } from "@/types/appData"
 
-export const getTasksStorage = () =>
+export const getTasksStorage = (): appDataType[] | never =>
 {
     if(typeof window !== 'undefined' && window.localStorage)
     {
@@ -16,7 +16,7 @@ export const getTasksStorage = () =>
     }
 }
 
-export const addTask = (task: appDataType) => 
+export const addTask = (task: appDataType): boolean => 
 {
     try
     {
@@ -26,6 +26,8 @@ export const addTask = (task: appDataType) =>
         {
             const newData = JSON.parse(storage)
 
+            task.position = newData[newData.length - 1].position + 1
+
             newData.push(task)
 
             localStorage.setItem("tasks", JSON.stringify(newData))
@@ -33,6 +35,8 @@ export const addTask = (task: appDataType) =>
             return true
         }
     
+        task.position = 0
+
         const newData = [ task ]
     
         localStorage.setItem("tasks", JSON.stringify(newData))
@@ -46,7 +50,7 @@ export const addTask = (task: appDataType) =>
     }
 }
 
-export const editTask = (task: appDataType) =>
+export const editTask = (task: appDataType): boolean =>
 {
     try
     {
@@ -78,7 +82,33 @@ export const editTask = (task: appDataType) =>
     }
 }
 
-export const deleteTask = (task: appDataType) =>
+export const updatePositions = (indexDragged: number, indexDropped: number): void =>
+{
+    try
+    {
+        const storage = localStorage.getItem("tasks")
+        
+        const data = JSON.parse(storage)
+
+        const dragItem = data.find((item: appDataType) => item.position === indexDragged)
+
+        const dropItem = data.find((item: appDataType) => item.position === indexDropped)
+
+        dragItem.position = indexDropped
+
+        dropItem.position = indexDragged
+
+        data.sort((a: appDataType, b: appDataType) => a.position - b.position)
+
+        localStorage.setItem("tasks", JSON.stringify(data))
+    }
+    catch(e)
+    {
+        console.error("Error", e)
+    }
+}
+
+export const deleteTask = (task: appDataType): boolean =>
 {
     try 
     {

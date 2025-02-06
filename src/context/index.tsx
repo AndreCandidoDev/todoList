@@ -14,7 +14,7 @@ interface appContextType {
   data: appDataType[]
   activeTasksCounter: number
   setData: React.Dispatch<React.SetStateAction<appDataType[]>>
-  setMode: React.Dispatch<React.SetStateAction<"light" | "dark">>
+  setMode: React.Dispatch<React.SetStateAction<modeOptions>>
   setActiveTasksCounter: React.Dispatch<React.SetStateAction<number>>
   getTasks: () => void
   getActiveTasks: () => void
