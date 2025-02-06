@@ -12,8 +12,10 @@ type modeOptions = "light" | "dark"
 interface appContextType {
   mode: modeOptions
   data: appDataType[]
+  activeTasksCounter: number
   setData: React.Dispatch<React.SetStateAction<appDataType[]>>
   setMode: React.Dispatch<React.SetStateAction<"light" | "dark">>
+  setActiveTasksCounter: React.Dispatch<React.SetStateAction<number>>
   getTasks: () => void
   getActiveTasks: () => void
   getCompletedTasks: () => void
@@ -24,8 +26,10 @@ interface appContextType {
 const defaultProvider: appContextType = {
   mode: "dark",
   data: [],
+  activeTasksCounter: 0,
   setData: () => {},
   setMode: () => {},
+  setActiveTasksCounter: () => {},
   getTasks: () => {},
   getActiveTasks: () => {},
   getCompletedTasks: () => {},
@@ -39,6 +43,7 @@ const AppProvider = ({ children }: Props) =>
 {
   const [data, setData] = useState<appDataType[]>(defaultProvider.data)
   const [mode, setMode] = useState<modeOptions>(defaultProvider.mode)
+  const [activeTasksCounter, setActiveTasksCounter] = useState<number>(defaultProvider.activeTasksCounter)
 
   const getTasks = () =>
   {
@@ -114,8 +119,10 @@ const AppProvider = ({ children }: Props) =>
   const values = {
     data,
     mode,
+    activeTasksCounter,
     setData,
     setMode,
+    setActiveTasksCounter,
     getTasks,
     getActiveTasks,
     getCompletedTasks,

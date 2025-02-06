@@ -12,7 +12,7 @@ interface TaskRowProps {
 
 export const TaskRow: React.FC<TaskRowProps> = ({ task }) =>
 {
-    const { mode, getTasks } = useContext(AppContext)
+    const { mode, getTasks, countActiveTasks, setActiveTasksCounter } = useContext(AppContext)
 
     const [active, setActive] = useState(false)
     const [taskName, setTaskName] = useState("")
@@ -66,6 +66,9 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task }) =>
 
         if(result)
         {
+            const newCount = countActiveTasks()
+            setActiveTasksCounter(newCount)
+
             return
         }
     }

@@ -7,12 +7,14 @@ import { FilterButton } from "../filterButton"
 export const FooterFilter: React.FC = () =>
 {
     const { 
-        mode, 
+        mode,
+        activeTasksCounter,
+        setActiveTasksCounter, 
         getTasks, 
         getActiveTasks, 
         getCompletedTasks, 
         clearCompletedTasks,
-        countActiveTasks, 
+        countActiveTasks,
     } = useContext(AppContext)
 
     const [selectedFilter, setSelectedFilter] = useState<selectedFilterType>("all")
@@ -20,6 +22,9 @@ export const FooterFilter: React.FC = () =>
     useEffect(() => 
     {
         getTasks()
+
+        const counter = countActiveTasks()
+        setActiveTasksCounter(counter)
     }, [])
 
     const footerFilterClassName = () =>
@@ -35,7 +40,7 @@ export const FooterFilter: React.FC = () =>
     return (
         <div className={footerFilterClassName()}>
             <div className={styles.content}>
-                <p className={styles.info}>{countActiveTasks()} Items Left</p>
+                <p className={styles.info}>{activeTasksCounter} Items Left</p>
                 <div className={styles.controls}>
                     <FilterButton 
                         selectedFilter={selectedFilter} 
