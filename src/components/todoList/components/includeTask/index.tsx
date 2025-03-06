@@ -77,7 +77,7 @@ export const IncludeTask: React.FC = () =>
                 <CustomCheckbox activeTask={activeTask} setActiveTask={setActiveTask}/>
                 <input 
                     type="text" 
-                    placeholder="Create a new todo..."
+                    placeholder="Create a new todo... (Press Enter to Add)"
                     defaultValue={taskText}
                     onChange={(e: BaseSyntheticEvent) => setTextTask(e.target.value)}
                     ref={ref}

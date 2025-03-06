@@ -22,10 +22,10 @@ export const addTask = (task: appDataType): boolean =>
     {
         const storage = localStorage.getItem("tasks")
         
-        if(storage)
+        let newData = JSON.parse(storage)
+        
+        if(newData && newData?.length > 0)
         {
-            const newData = JSON.parse(storage)
-
             task.position = newData[newData.length - 1].position + 1
 
             newData.push(task)
@@ -37,7 +37,7 @@ export const addTask = (task: appDataType): boolean =>
     
         task.position = 0
 
-        const newData = [ task ]
+        newData = [ task ]
     
         localStorage.setItem("tasks", JSON.stringify(newData))
     

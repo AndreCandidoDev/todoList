@@ -7,7 +7,7 @@ import { updatePositions } from "@/utils/taskFunctions"
 
 export const ListTask: React.FC = () =>
 {
-    const { data } = useContext(AppContext)
+    const { data, mode } = useContext(AppContext)
 
     const [dataTable, setDataTable] = useState([])
 
@@ -47,6 +47,16 @@ export const ListTask: React.FC = () =>
         e.preventDefault()
     }
 
+    const emptyListClassName = () =>
+    {
+        if(mode === 'dark')
+        {
+            return styles.emptyList + " " + styles.emptyListDark
+        }
+
+        return styles.emptyList + " " + styles.emptyListLight
+    }
+
     return (
         <div className={styles.listTask}>
             <div className={styles.content}>
@@ -62,6 +72,12 @@ export const ListTask: React.FC = () =>
                         <TaskRow task={task} />
                     </div>
                 ))}
+
+                {dataTable.length === 0 && (
+                    <div className={emptyListClassName()}>
+                        <p>Empty List, there is not a task for a while :)</p>
+                    </div>
+                )}
             </div>
             <FooterFilter />
         </div>
